@@ -13,6 +13,9 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var itemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
+    var items = [Item]()
+    var categories = Categories()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +24,9 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
         navigationController?.isNavigationBarHidden = true
     }
     
-    var categories = [Categories]()
-    var items = [ToDoItem]()
-    
     @IBAction func addButtonPressed(_ sender: UIButton) {
         if let newItem = itemTextField.text {
-            items.append(ToDoItem(name: newItem))
+            items.append(Item(context: context))
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -38,6 +38,7 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
+//        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +49,7 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destination = storyboard?.instantiateViewController(identifier: "") as! ItemViewController
-        destination.title = categories[indexPath.row].name
+        //destination.title = categories.items[indexPath.row].name
     }
 
     
