@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,6 +18,7 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        navigationController?.isNavigationBarHidden = true
     }
     
     var categories = [Categories]()
@@ -28,6 +30,8 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
+            //Add to Core Data
         }
     }
     
@@ -40,6 +44,11 @@ class MainView: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(items[indexPath.row].name)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destination = storyboard?.instantiateViewController(identifier: "") as! ItemViewController
+        destination.title = categories[indexPath.row].name
     }
 
     
