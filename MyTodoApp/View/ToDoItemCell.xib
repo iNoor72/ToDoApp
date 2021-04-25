@@ -16,21 +16,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="338" height="88"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kja-Ok-IAj">
-                        <rect key="frame" x="20" y="32" width="298" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kja-Ok-IAj">
+                        <rect key="frame" x="20" y="16" width="298" height="24"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" restorationIdentifier="cell" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57Q-I6-FcN">
+                        <rect key="frame" x="20" y="40" width="298" height="24"/>
+                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                        <color key="textColor" red="0.79216760399999997" green="0.79213756319999995" blue="0.79215794799999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Kja-Ok-IAj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="2jj-Zk-KOV"/>
+                    <constraint firstItem="57Q-I6-FcN" firstAttribute="top" secondItem="Kja-Ok-IAj" secondAttribute="bottom" id="3Y8-2K-Ray"/>
                     <constraint firstAttribute="trailing" secondItem="Kja-Ok-IAj" secondAttribute="trailing" constant="20" id="4OG-GV-hyd"/>
-                    <constraint firstAttribute="bottom" secondItem="Kja-Ok-IAj" secondAttribute="bottom" constant="40" id="C9u-Le-unX"/>
-                    <constraint firstItem="Kja-Ok-IAj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="e6s-hD-B6q"/>
+                    <constraint firstItem="57Q-I6-FcN" firstAttribute="trailing" secondItem="Kja-Ok-IAj" secondAttribute="trailing" id="Kqv-fn-m0D"/>
+                    <constraint firstAttribute="bottom" secondItem="57Q-I6-FcN" secondAttribute="bottom" constant="24" id="Y5F-OA-Irj"/>
+                    <constraint firstItem="Kja-Ok-IAj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="e6s-hD-B6q"/>
+                    <constraint firstItem="57Q-I6-FcN" firstAttribute="leading" secondItem="Kja-Ok-IAj" secondAttribute="leading" id="jTi-Cp-ZcW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="57Q-I6-FcN" id="k4L-7p-xXz"/>
+                <outlet property="nameLabel" destination="Kja-Ok-IAj" id="eAE-QV-CRT"/>
+            </connections>
             <point key="canvasLocation" x="-165.21739130434784" y="-15.401785714285714"/>
         </tableViewCell>
     </objects>

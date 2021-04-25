@@ -107,7 +107,6 @@
 		7CD86C0E25631A9E001B55D4 /* MyTodoApp */ = {
 			isa = PBXGroup;
 			children = (
-				7CD86C4725631AC5001B55D4 /* Model */,
 				7CD86C4625631ABE001B55D4 /* View */,
 				7CD86C4B25631E59001B55D4 /* Controller */,
 				7CD86C1125631A9E001B55D4 /* SceneDelegate.swift */,
@@ -147,13 +146,6 @@
 				7C254659262E4267003938E1 /* ToDoItemCell.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		7CD86C4725631AC5001B55D4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7CD86C4B25631E59001B55D4 /* Controller */ = {
