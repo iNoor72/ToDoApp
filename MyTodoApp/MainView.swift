@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 
 class MainView: UIViewController {
-    
 
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -29,17 +28,19 @@ class MainView: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
         if let categoryName = categoryTextField.text {
+            //db.create(newcat)
             let newCategory = Categories(context: context)
             newCategory.name = categoryName
             categories.append(newCategory)
+            //db.save()
             savingContext()
+            //db.getdata(type)
             getCategories()
         }
     }
     
     
     //MARK:- Core Data Functions
-    
     func getCategories() {
         do {
             categories = try context.fetch(Categories.fetchRequest())
