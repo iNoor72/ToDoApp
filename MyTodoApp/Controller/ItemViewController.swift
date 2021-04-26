@@ -43,8 +43,11 @@ class ItemViewController: UIViewController {
     //MARK:- Core Data Functions
     func getItems() {
         do {
-            //We need to change this line
-            categoryItems = try context.fetch(Item.fetchRequest())
+            //We need to change this line because it's not working to fetch the Items from the given Category
+            print("Nothing")
+            //categoryItems = try context.fetch(Item.fetchRequest())
+            //try context.fetch(Categories.fetchRequest())
+            //context.object(with: category?.objectID ?? NSManagedObjectID())
         }catch {
             print("There was an error fetching request of Item class. \(error.localizedDescription)")
         }
@@ -54,8 +57,8 @@ class ItemViewController: UIViewController {
         }
     }
     
-    func deleteCategory(named category: Categories){
-        context.delete(category)
+    func deleteItem(named item: Item){
+        context.delete(item)
         savingContext()
         getItems()
     }
@@ -65,6 +68,14 @@ class ItemViewController: UIViewController {
             try context.save()
         }catch {
             print("There was a problem while saving new context. \(error.localizedDescription)")
+        }
+    }
+    
+    func updateItem(named item: Item){
+        do {
+            try context.setValue("", forKey: "Item")
+        }catch{
+            print("There was a problem while updating the Item. \(error.localizedDescription)")
         }
     }
 }

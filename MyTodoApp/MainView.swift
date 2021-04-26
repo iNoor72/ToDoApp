@@ -67,6 +67,14 @@ class MainView: UIViewController {
         }
     }
     
+    func updateCategory(named category: Categories){
+        do {
+            try context.setValue("", forKey: "Categories")
+        }catch{
+            print("There was a problem while updating the category. \(error.localizedDescription)")
+        }
+    }
+    
 }
 
     //MARK:- TableView Delegate & DataSource Methods
