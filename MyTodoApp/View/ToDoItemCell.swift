@@ -12,9 +12,12 @@ class ToDoItemCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    let formatter = DateFormatter()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        formatter.timeZone = TimeZone(abbreviation: "GMT+2")
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

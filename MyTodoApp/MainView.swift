@@ -14,7 +14,7 @@ class MainView: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
     let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
     
-    var categories = [Categories]()
+    var categoriesArray = [Categories]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,6 @@ class MainView: UIViewController, UITextFieldDelegate {
         tableView.dataSource = self
         categoryTextField.delegate = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.backButtonTitle = "Categories"
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
@@ -31,19 +30,21 @@ class MainView: UIViewController, UITextFieldDelegate {
             //db.create(newcat)
             let newCategory = Categories(context: context)
             newCategory.name = categoryName
-            categories.append(newCategory)
+            categoriesArray.append(newCategory)
             //db.save()
             savingContext()
             //db.getdata(type)
             getCategories()
+            categoryTextField.text = ""
         }
     }
+    
     
     
     //MARK:- Core Data Functions
     func getCategories() {
         do {
-            categories = try context.fetch(Categories.fetchRequest())
+            categoriesArray = try context.fetch(Categories.fetchRequest())
         }catch {
             print("There was an error fetching request of Categories class. \(error.localizedDescription)")
         }
@@ -81,20 +82,18 @@ class MainView: UIViewController, UITextFieldDelegate {
 
 extension MainView : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categoriesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = categories[indexPath.row].name
+        cell.textLabel?.text = categoriesArray[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         let destination = storyboard?.instantiateViewController(identifier: "ItemViewController") as! ItemViewController
-        let currentCategory = categories[indexPath.row]
+        let currentCategory = categoriesArray[indexPath.row]
         destination.category = currentCategory
         navigationController?.pushViewController(destination, animated: true)
     }

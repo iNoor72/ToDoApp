@@ -15,13 +15,14 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
     let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
     
     var category: Categories?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         itemTextField.delegate = self
-        tableView.register(UINib(nibName: "ToDoItemCell", bundle: nil), forCellReuseIdentifier: "ToDoItemCell")
+        tableView.register(UINib(nibName: "ToDoItemCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
         title = "\(category?.name ?? "No category passed here")"
         getItems()
     }
@@ -32,12 +33,12 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
             let newItem = Item(context: context)
             newItem.name = itemName
             newItem.createdAt = Date()
-            //categoryItems.append(newItem)
             category?.items?.append(newItem)
             //db.save()
             savingContext()
             //db.getdata(type)
             getItems()
+            itemTextField.text = ""
         }
     }
     
@@ -46,10 +47,10 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
         do {
             //We need to change this line because it's not working to fetch the Items from the given Category, the whole problems is here 100%
 //            category = try context.fetch(Categories.fetchRequest())
-            //Gets the same items everytime, and now it's not saving categories
-            //category?.items = try context.fetch(Item.fetchRequest())
+            //It crashes the fetching of categories
+//            category?.items = try context.fetch(Item.fetchRequest())
             
-        }catch {
+        } catch {
             print("There was an error fetching request of Item class. \(error.localizedDescription)")
         }
         
@@ -67,7 +68,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
     func savingContext() {
         do {
             try context.save()
-        }catch {
+        } catch {
             print("There was a problem while saving new context. \(error.localizedDescription)")
         }
     }
@@ -75,7 +76,7 @@ class ItemViewController: UIViewController, UITextFieldDelegate {
     func updateItem(named item: Item){
         do {
             try context.setValue("", forKey: "Item")
-        }catch{
+        } catch {
             print("There was a problem while updating the Item. \(error.localizedDescription)")
         }
     }
@@ -88,9 +89,9 @@ extension ItemViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell") as! ToDoItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell") as! ToDoItemCell
         cell.nameLabel.text = category?.items?[indexPath.row].name
-        cell.dateLabel.text = "\(category?.items?[indexPath.row].createdAt ?? Date())"
+        cell.dateLabel.text = "\(category?.items?[indexPath.row].createdAt)"
         
         return cell
     }
