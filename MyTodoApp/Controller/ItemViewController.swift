@@ -8,30 +8,31 @@
 import UIKit
 import CoreData
 
-class ItemViewController: UIViewController {
+class ItemViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var itemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
     
     var category: Categories?
-    var categoryItems = [Item]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        itemTextField.delegate = self
         tableView.register(UINib(nibName: "ToDoItemCell", bundle: nil), forCellReuseIdentifier: "ToDoItemCell")
         title = "\(category?.name ?? "No category passed here")"
+        getItems()
     }
-
+    
     @IBAction func addButtonTapped(_ sender: UIButton) {
         if let itemName = itemTextField.text {
             //db.create(newcat)
             let newItem = Item(context: context)
             newItem.name = itemName
             newItem.createdAt = Date()
-            categoryItems.append(newItem)
+            //categoryItems.append(newItem)
             category?.items?.append(newItem)
             //db.save()
             savingContext()
@@ -43,11 +44,11 @@ class ItemViewController: UIViewController {
     //MARK:- Core Data Functions
     func getItems() {
         do {
-            //We need to change this line because it's not working to fetch the Items from the given Category
-            print("Nothing")
-            //categoryItems = try context.fetch(Item.fetchRequest())
-            //try context.fetch(Categories.fetchRequest())
-            //context.object(with: category?.objectID ?? NSManagedObjectID())
+            //We need to change this line because it's not working to fetch the Items from the given Category, the whole problems is here 100%
+//            category = try context.fetch(Categories.fetchRequest())
+            //Gets the same items everytime, and now it's not saving categories
+            //category?.items = try context.fetch(Item.fetchRequest())
+            
         }catch {
             print("There was an error fetching request of Item class. \(error.localizedDescription)")
         }
@@ -87,13 +88,10 @@ extension ItemViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ToDoItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell") as! ToDoItemCell
         cell.nameLabel.text = category?.items?[indexPath.row].name
         cell.dateLabel.text = "\(category?.items?[indexPath.row].createdAt ?? Date())"
         
-        return UITableViewCell()
+        return cell
     }
-    
-    
-    
 }

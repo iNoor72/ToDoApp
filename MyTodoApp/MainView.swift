@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class MainView: UIViewController {
+class MainView: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -21,9 +21,9 @@ class MainView: UIViewController {
         getCategories()
         tableView.delegate = self
         tableView.dataSource = self
+        categoryTextField.delegate = self
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.backButtonTitle = "Categories"
-        categoryTextField.resignFirstResponder()
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
@@ -91,6 +91,8 @@ extension MainView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let destination = storyboard?.instantiateViewController(identifier: "ItemViewController") as! ItemViewController
         let currentCategory = categories[indexPath.row]
         destination.category = currentCategory
