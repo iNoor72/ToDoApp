@@ -12,10 +12,13 @@ class MainView: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
+//    let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
+    let database = CoreDataManager()
     
     var categoriesArray = [Categories]()
-    
+    deinit{
+        print("deinit called from cats")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         getCategories()
@@ -28,23 +31,22 @@ class MainView: UIViewController, UITextFieldDelegate {
     @IBAction func addButtonPressed(_ sender: UIButton) {
         if let categoryName = categoryTextField.text {
             //db.create(newcat)
-            let newCategory = Categories(context: context)
+            let newCategory = Categories(context: database.context)
             newCategory.name = categoryName
             categoriesArray.append(newCategory)
             //db.save()
-            savingContext()
+            database.update()
             //db.getdata(type)
             getCategories()
             categoryTextField.text = ""
         }
     }
     
-    
-    
     //MARK:- Core Data Functions
     func getCategories() {
         do {
-            categoriesArray = try context.fetch(Categories.fetchRequest())
+            categoriesArray = try database.context.fetch(Categories.fetchRequest())
+            
         }catch {
             print("There was an error fetching request of Categories class. \(error.localizedDescription)")
         }
@@ -55,14 +57,14 @@ class MainView: UIViewController, UITextFieldDelegate {
     }
     
     func deleteCategory(named category: Categories){
-        context.delete(category)
+        database.context.delete(category)
         savingContext()
         getCategories()
     }
     
     func savingContext() {
         do {
-            try context.save()
+            try database.context.save()
         }catch {
             print("There was a problem while saving new context. \(error.localizedDescription)")
         }
@@ -70,7 +72,7 @@ class MainView: UIViewController, UITextFieldDelegate {
     
     func updateCategory(named category: Categories){
         do {
-            try context.setValue("", forKey: "Categories")
+            try database.context.setValue("", forKey: "Categories")
         }catch{
             print("There was a problem while updating the category. \(error.localizedDescription)")
         }

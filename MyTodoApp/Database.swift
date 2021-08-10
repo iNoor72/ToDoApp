@@ -9,37 +9,12 @@ import Foundation
 import UIKit
 import CoreData
 
-protocol CoreDataDatabase {
+protocol Database {
     //Applying All CRUD operations for all databases using this protocol
-    
     func create()
     func getData()
     func update()
-    func delete()
-}
-
-struct CoreData: CoreDataDatabase {
-    let context = (UIApplication.shared.delegate as! AppDelegate).CoreDataDatabase.viewContext
-    
-    func create() {
-        
-    }
-    
-    func getData() {
-        do {
-            
-        }
-        catch {
-            print("There was an error fetching request of Categories class. \(error.localizedDescription)")
-        }
-    }
-    
-    func update() {
-        
-    }
-    
-    func delete() {
-        
-    }
-    
+    func deleteCategory(category: Categories)
+    func deleteItem(item: Item)
+    func save()
 }

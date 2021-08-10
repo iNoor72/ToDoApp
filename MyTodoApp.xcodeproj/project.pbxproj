@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7C25465A262E4267003938E1 /* ToDoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C254658262E4267003938E1 /* ToDoItemCell.swift */; };
 		7C25465B262E4267003938E1 /* ToDoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C254659262E4267003938E1 /* ToDoItemCell.xib */; };
+		7C36916C26C3042A00AE2C8F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36916B26C3042A00AE2C8F /* CoreDataManager.swift */; };
+		7C36916E26C3043900AE2C8F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36916D26C3043900AE2C8F /* RealmManager.swift */; };
 		7C8EFE9C2636189700020FD6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8EFE9B2636189700020FD6 /* Database.swift */; };
 		7CA455A226309A750046C9ED /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA455A126309A750046C9ED /* ItemViewController.swift */; };
 		7CD86C1025631A9E001B55D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD86C0F25631A9E001B55D4 /* AppDelegate.swift */; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		7C254658262E4267003938E1 /* ToDoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemCell.swift; sourceTree = "<group>"; };
 		7C254659262E4267003938E1 /* ToDoItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoItemCell.xib; sourceTree = "<group>"; };
+		7C36916B26C3042A00AE2C8F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		7C36916D26C3043900AE2C8F /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		7C8EFE9B2636189700020FD6 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		7CA455A126309A750046C9ED /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		7CD86C0C25631A9E001B55D4 /* MyTodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +124,8 @@
 				7CD86C2025631A9F001B55D4 /* Info.plist */,
 				7CD86C1825631A9E001B55D4 /* MyTodoApp.xcdatamodeld */,
 				7C8EFE9B2636189700020FD6 /* Database.swift */,
+				7C36916B26C3042A00AE2C8F /* CoreDataManager.swift */,
+				7C36916D26C3043900AE2C8F /* RealmManager.swift */,
 			);
 			path = MyTodoApp;
 			sourceTree = "<group>";
@@ -295,7 +301,9 @@
 				7CD86C1425631A9E001B55D4 /* MainView.swift in Sources */,
 				7CD86C1025631A9E001B55D4 /* AppDelegate.swift in Sources */,
 				7CD86C1225631A9E001B55D4 /* SceneDelegate.swift in Sources */,
+				7C36916E26C3043900AE2C8F /* RealmManager.swift in Sources */,
 				7C8EFE9C2636189700020FD6 /* Database.swift in Sources */,
+				7C36916C26C3042A00AE2C8F /* CoreDataManager.swift in Sources */,
 				7CD86C1A25631A9E001B55D4 /* MyTodoApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
